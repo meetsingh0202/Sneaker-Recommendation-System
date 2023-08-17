@@ -1,10 +1,14 @@
 from flask import Flask, render_template, request
 import pickle
 import numpy as np
+from collections import *
 
 app = Flask(__name__)
 
 shoes = pickle.load(open('shoes.pkl','rb'))
+
+cart = defaultdict(list)
+userId = 1
 
 @app.route('/')
 def index():
@@ -16,6 +20,17 @@ def index():
         shoeColor = list(shoes['shoeColour'].values),
         shoePrice = list(shoes['shoePrice'].values)
     )
+
+@app.route('/addToCart/<shoeId>')
+def addToCart(shoeId):
+    cart[userId].append(shoeId)
+    print("ADDED: ", cart)
+    return "Ok"
+
+@app.route('/removeFromCart/<shoeId>')
+def removeFromCart(shoeId):
+    cart[userId].remove(shoeId)
+    return "Ok"
 
 # @app.route('/recommend')
 # def recommend_ui():

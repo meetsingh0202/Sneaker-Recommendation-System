@@ -9,16 +9,55 @@
     .text-white{
         color:white
     }
-</style>
-<body style="background-color:black">
+    .user-icon {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+        color: black;
+        cursor: pointer;
+        float: right;
+    }
 
-    <nav class="navbar" style="background-color:#6558ae">
-        <a class="navbar-brand">My Book recommender</a>
+    .user-icon:hover {
+        background-color: #2980b9;
+    }
+    
+</style>
+
+<script>
+    function addToCart(button) {
+        if (button.textContent == "Add to Cart"){
+            fetch(`/addToCart/${button.value}`) 
+            alert("Added To Cart!");
+            button.textContent = "Remove From Cart";
+        }
+        else{
+            fetch(`/removeFromCart/${button.value}`)
+            alert("Removed From Cart!");
+            button.textContent = "Add To Cart";
+        }
+    };
+</script>
+
+<body style="background-color:black">
+    
+   
+    <nav class="navbar" style="background-color: whitesmoke">
+        <a class="navbar-brand">My Shoe recommender</a>
+        
         <ul class="nav navbar-nav">
             <li><a href="/">Home</a></li>
             <li><a href="/recommend">Recommend</a></li>
             <li><a>Contact</a></li>
         </ul>
+        
+        <div class="user-icon ">
+            <span>&#9787;</span>
+        </div>
     </nav>
     
     
@@ -36,6 +75,7 @@
                             <p class="text-white">{{ shoeBrand[i] }}</p>
                             <h4 class="text-white">Color - {{ shoeColor[i] }}</h4>
                             <h4 class="text-white">Price - ${{ shoePrice[i] }}</h4>
+                            <button id="addToCartButton" onclick= "addToCart(this)" value="{{ i }}">Add to Cart</button>
                         </div>
                     </div>
                 </div>
