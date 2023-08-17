@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, session, url_for
 import pickle
 import numpy as np
 from collections import *
@@ -6,9 +6,10 @@ from collections import *
 app = Flask(__name__)
 
 shoes = pickle.load(open('shoes.pkl','rb'))
+userCart = pickle.load(open('userCart.pkl','rb'))
+currSession = pickle.load(open('session.pkl','rb'))
 
-cart = defaultdict(list)
-userId = 1
+users = {'1' : "a", '2' : "b"}
 
 @app.route('/')
 def index():
@@ -18,19 +19,65 @@ def index():
         shoeImage = list(shoes['shoeImage'].values),
         shoeCatagory = list(shoes['shoeCategory'].values),
         shoeColor = list(shoes['shoeColour'].values),
-        shoePrice = list(shoes['shoePrice'].values)
+        shoePrice = list(shoes['shoePrice'].values),
+        user = currSession,
     )
 
 @app.route('/addToCart/<shoeId>')
 def addToCart(shoeId):
-    cart[userId].append(shoeId)
-    print("ADDED: ", cart)
+    tempCart = userCart
+    tempCart[currSession].add(shoeId)
+    pickle.dump(tempCart, open('userCart.pkl','wb'))
     return "Ok"
 
 @app.route('/removeFromCart/<shoeId>')
 def removeFromCart(shoeId):
-    cart[userId].remove(shoeId)
+    tempCart = userCart
+    tempCart[currSession].remove(shoeId)
+    pickle.dump(tempCart, open('userCart.pkl','wb'))
     return "Ok"
+
+@app.route('/login', methods=['POST'])
+def login():
+    username = request.form.get('username')
+    password = request.form.get('password')
+    if users.get(username) == password:
+        session['user'] = username
+        pickle.dump(username, open('session.pkl','wb'))
+        return render_template('index.html', 
+            shoeId = list(shoes['shoeId'].values),
+            shoeBrand = list(shoes['shoeBrand'].values),
+            shoeImage = list(shoes['shoeImage'].values),
+            shoeCatagory = list(shoes['shoeCategory'].values),
+            shoeColor = list(shoes['shoeColour'].values),
+            shoePrice = list(shoes['shoePrice'].values),
+            user = username,
+            sessionCheck = 200,
+        )
+    else:
+        return render_template('index.html', 
+            shoeId = list(shoes['shoeId'].values),
+            shoeBrand = list(shoes['shoeBrand'].values),
+            shoeImage = list(shoes['shoeImage'].values),
+            shoeCatagory = list(shoes['shoeCategory'].values),
+            shoeColor = list(shoes['shoeColour'].values),
+            shoePrice = list(shoes['shoePrice'].values),
+            invalid = True,
+        )
+
+@app.route('/logout')
+def logout():
+    session.pop('user', None)
+    pickle.dump(None, open('session.pkl','wb'))
+    return render_template('index.html', 
+            shoeId = list(shoes['shoeId'].values),
+            shoeBrand = list(shoes['shoeBrand'].values),
+            shoeImage = list(shoes['shoeImage'].values),
+            shoeCatagory = list(shoes['shoeCategory'].values),
+            shoeColor = list(shoes['shoeColour'].values),
+            shoePrice = list(shoes['shoePrice'].values),
+            user = None,
+        )
 
 # @app.route('/recommend')
 # def recommend_ui():
@@ -57,4 +104,6 @@ def removeFromCart(shoeId):
 #     return render_template('recommend.html',data=data)
 
 if __name__ == '__main__':
+    app.secret_key = 'super secret key'
+
     app.run(debug = True)
