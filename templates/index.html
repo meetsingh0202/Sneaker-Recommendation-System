@@ -124,9 +124,23 @@
     
     #wishlistButton {
         cursor: pointer;
-        width: 45px;
+        width: 100px;
         height: 45px; 
-        font-size: 25px;
+        font-size: 35px;
+        position: absolute;
+        top: 15px;
+        right: 0;
+    }
+
+    .shoeBrand {
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .shoeBrand:hover{
+        overflow: visible; 
+        white-space: normal;
+        height:auto;  /* just added this line */
     }
 
     .shoeColor {
@@ -142,7 +156,7 @@
 
 </style>
 
-<body style="background-color:white">
+<body style="background-image: url(https://i.pinimg.com/originals/4c/52/97/4c5297b1a347d051533c39e3f630a274.jpg)">
     <nav class="navbar" style="background-color: blue">
         <div class = "topnav">
             <a style="color:yellow;"> <b>Shoekart</b> </a>
@@ -187,12 +201,12 @@
                 {% for i in range(50) %}
                     <div class="col-md-3" style="margin-top:50px">
                         <div class="card">
-                            <div class="card-body" style="width: 260px; height: 300px;">
-                                    <img class="card-img-top" style="text-align: center; border: 5px white; border-radius: 5px;" width="140" height="150" src="{{ shoeImage[i] }}">
+                            <div class="card-body" style="width: 260px; height: 300px; background-color: white;">
+                                    <img class="card-img-top" style="text-align: center; border: 5px white; border-radius: 5px; margin-top: 30px;" width="140" height="150" src="{{ shoeImage[i] }}">
                                     <div class = "container" style="width: 132px;">
-                                        <p style="color: grey;"><b>{{ shoeBrand[i] }}</b></p>
-                                        <h5 class="shoeColor">{{ shoeColor[i] }}</h5>
-                                        <h5>₹{{ shoePrice[i] }}</h5>
+                                        <p class="shoeBrand" style="color: grey;"><b>{{ shoeBrand[i] }}</b></p>
+                                        <h5 class="shoeColor" style="height: 15px;">{{ shoeColor[i] }}</h5>
+                                        <h5 style="font-size: larger;">₹{{ shoePrice[i] }}</h5>
                                         <div class = "container" id="wishlistButton" onclick="addToCart(this)" data-value="{{ i }}" clicked=false>
                                             &#10084;
                                         </div>
