@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, session, url_for
+from flask import Flask, render_template, request, redirect, session, url_for, jsonify
 import pickle
 import numpy as np
 from collections import *
@@ -9,7 +9,9 @@ shoes = pickle.load(open('shoes.pkl','rb'))
 userCart = pickle.load(open('userCart.pkl','rb'))
 currSession = pickle.load(open('session.pkl','rb'))
 
-users = {'1' : "a", '2' : "b"}
+print(userCart)
+
+users = { '1' : 'a', '2' : 'b'}
 
 @app.route('/')
 def index():
@@ -21,21 +23,44 @@ def index():
         shoeColor = list(shoes['shoeColour'].values),
         shoePrice = list(shoes['shoePrice'].values),
         user = currSession,
+        userCart = list(userCart[currSession]),
     )
+
+@app.route("/getCartValues/<userId>")
+def getCartValues(userId):
+    return jsonify(list(userCart.get(userId, [])))
 
 @app.route('/addToCart/<shoeId>')
 def addToCart(shoeId):
     tempCart = userCart
     tempCart[currSession].add(shoeId)
     pickle.dump(tempCart, open('userCart.pkl','wb'))
-    return "Ok"
+    return render_template('index.html', 
+            shoeId = list(shoes['shoeId'].values),
+            shoeBrand = list(shoes['shoeBrand'].values),
+            shoeImage = list(shoes['shoeImage'].values),
+            shoeCatagory = list(shoes['shoeCategory'].values),
+            shoeColor = list(shoes['shoeColour'].values),
+            shoePrice = list(shoes['shoePrice'].values),
+            user = currSession,
+            userCart = list(tempCart[currSession]),
+        )
 
 @app.route('/removeFromCart/<shoeId>')
 def removeFromCart(shoeId):
     tempCart = userCart
     tempCart[currSession].remove(shoeId)
     pickle.dump(tempCart, open('userCart.pkl','wb'))
-    return "Ok"
+    return render_template('index.html', 
+            shoeId = list(shoes['shoeId'].values),
+            shoeBrand = list(shoes['shoeBrand'].values),
+            shoeImage = list(shoes['shoeImage'].values),
+            shoeCatagory = list(shoes['shoeCategory'].values),
+            shoeColor = list(shoes['shoeColour'].values),
+            shoePrice = list(shoes['shoePrice'].values),
+            user = currSession,
+            userCart = list(tempCart[currSession]),
+        )
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -52,7 +77,7 @@ def login():
             shoeColor = list(shoes['shoeColour'].values),
             shoePrice = list(shoes['shoePrice'].values),
             user = username,
-            sessionCheck = 200,
+            userCart = list(userCart[currSession]),
         )
     else:
         return render_template('index.html', 
@@ -61,8 +86,9 @@ def login():
             shoeImage = list(shoes['shoeImage'].values),
             shoeCatagory = list(shoes['shoeCategory'].values),
             shoeColor = list(shoes['shoeColour'].values),
-            shoePrice = list(shoes['shoePrice'].values),
+            shoePrice = list(shoes['shoePrice']),
             invalid = True,
+            userCart = None,
         )
 
 @app.route('/logout')
@@ -77,6 +103,7 @@ def logout():
             shoeColor = list(shoes['shoeColour'].values),
             shoePrice = list(shoes['shoePrice'].values),
             user = None,
+            userCart = None,
         )
 
 # @app.route('/recommend')
@@ -105,5 +132,4 @@ def logout():
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
-
     app.run(debug = True)
