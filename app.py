@@ -2,20 +2,36 @@ from flask import Flask, render_template, request, redirect, session, url_for, j
 import pickle
 import numpy as np
 from collections import *
+import csv
 
-app = Flask(__name__)
+
+app = Flask(__name__, static_url_path='/static')
 
 shoes = pickle.load(open('shoes.pkl','rb'))
 userCart = pickle.load(open('userCart.pkl','rb'))
 currSession = pickle.load(open('session.pkl','rb'))
 
+sneakers = {}
+
+with open("ShoeDatabaseFinal.csv", "r") as db:
+    csv_reader = csv.reader(db)
+    count = 0
+    for row in csv_reader:
+        if count == 0:
+            count += 1
+            continue
+        id, brand, categories, colors, imageUrl, price = row
+        sneakers[int(id)] = {"shoeId" : id, "brand": brand, "categories": categories, "colors": colors, "imageUrl": imageUrl, "price": price}
+
+
 print(userCart)
 
 users = { '1' : 'a', '2' : 'b'}
 
-@app.route('/')
-def index():
-    return render_template('index.html', 
+@app.route('/bestSellers')
+def bestSellers():
+    currSession = pickle.load(open('session.pkl','rb'))
+    return render_template('bestSellers.html', 
         shoeId = list(shoes['shoeId'].values),
         shoeBrand = list(shoes['shoeBrand'].values),
         shoeImage = list(shoes['shoeImage'].values),
@@ -28,14 +44,16 @@ def index():
 
 @app.route("/getCartValues/<userId>")
 def getCartValues(userId):
+    print(userCart)
     return jsonify(list(userCart.get(userId, [])))
 
 @app.route('/addToCart/<shoeId>')
 def addToCart(shoeId):
+    currSession = pickle.load(open('session.pkl','rb'))
     tempCart = userCart
     tempCart[currSession].add(shoeId)
     pickle.dump(tempCart, open('userCart.pkl','wb'))
-    return render_template('index.html', 
+    return render_template('bestSellers.html', 
             shoeId = list(shoes['shoeId'].values),
             shoeBrand = list(shoes['shoeBrand'].values),
             shoeImage = list(shoes['shoeImage'].values),
@@ -48,10 +66,11 @@ def addToCart(shoeId):
 
 @app.route('/removeFromCart/<shoeId>')
 def removeFromCart(shoeId):
+    currSession = pickle.load(open('session.pkl','rb'))
     tempCart = userCart
     tempCart[currSession].remove(shoeId)
     pickle.dump(tempCart, open('userCart.pkl','wb'))
-    return render_template('index.html', 
+    return render_template('bestSellers.html', 
             shoeId = list(shoes['shoeId'].values),
             shoeBrand = list(shoes['shoeBrand'].values),
             shoeImage = list(shoes['shoeImage'].values),
@@ -62,6 +81,7 @@ def removeFromCart(shoeId):
             userCart = list(tempCart[currSession]),
         )
 
+
 @app.route('/login', methods=['POST'])
 def login():
     username = request.form.get('username')
@@ -69,7 +89,7 @@ def login():
     if users.get(username) == password:
         session['user'] = username
         pickle.dump(username, open('session.pkl','wb'))
-        return render_template('index.html', 
+        return render_template('homepage.html', 
             shoeId = list(shoes['shoeId'].values),
             shoeBrand = list(shoes['shoeBrand'].values),
             shoeImage = list(shoes['shoeImage'].values),
@@ -80,7 +100,7 @@ def login():
             userCart = list(userCart[currSession]),
         )
     else:
-        return render_template('index.html', 
+        return render_template('homepage.html', 
             shoeId = list(shoes['shoeId'].values),
             shoeBrand = list(shoes['shoeBrand'].values),
             shoeImage = list(shoes['shoeImage'].values),
@@ -95,7 +115,89 @@ def login():
 def logout():
     session.pop('user', None)
     pickle.dump(None, open('session.pkl','wb'))
-    return render_template('index.html', 
+    return render_template('homepage.html', user = None)
+
+@app.route('/openCart')
+def openCart():
+    currSession = pickle.load(open('session.pkl','rb'))
+    res = []
+    for i in userCart[currSession]:
+        currItem = []
+        for fields in sneakers[int(i)]:
+            currItem.append(sneakers[int(i)][fields])
+        res.append(currItem)
+    return render_template('openCart.html', currCart = res, user = currSession)
+
+@app.route('/')
+def home():
+    currSession = pickle.load(open('session.pkl','rb'))
+    return render_template('homepage.html', user = currSession)
+
+@app.route('/recommend')
+def recommend():
+
+    def getRecommendations(currUserId):
+        # Mock dataset: User interactions (collaborative filtering)
+        user_interactions = userCart
+
+        # Calculate collaborative similarity (mock values)
+        def collaborative_similarity(user1, user2):
+            if user1 in user_interactions and user2 in user_interactions:
+                intersection = len(set(user_interactions[user1]) & set(user_interactions[user2]))
+                union = len(set(user_interactions[user1]) | set(user_interactions[user2]))
+                return intersection / union
+            else:
+                return 0.0
+
+        # Calculate content-based similarity (mock values)
+        def content_based_similarity(sneaker1, sneaker2):
+            shared_attributes = sum(sneaker1[attr] == sneaker2[attr] for attr in ['brand', 'categories', 'colors', 'price'])
+            total_attributes = len(['brand', 'categories', 'colors', 'price'])
+            return shared_attributes / total_attributes
+
+        # Hybrid recommendation algorithm
+        def hybrid_recommendation(user_id, num_recommendations=20, collaborative_weight=0.5, content_based_weight=0.5):
+            user_interacted_sneakers = user_interactions.get(user_id, [])
+            
+            collaborative_scores = {}
+            content_based_scores = {}
+            
+            for other_user in user_interactions:
+                if other_user != user_id:
+                    collaborative_scores[other_user] = collaborative_similarity(user_id, other_user)
+            
+            for sneaker_id, sneaker in sneakers.items():
+                content_based_scores[sneaker_id] = 0
+                for user_sneaker_id in user_interacted_sneakers:
+                    content_based_scores[sneaker_id] += content_based_similarity(sneaker, sneakers[int(user_sneaker_id)])
+            
+            recommendations = []
+            for sneaker_id in sneakers:
+                hybrid_score = (collaborative_weight * np.mean(list(collaborative_scores.values()))) + (content_based_weight * content_based_scores[sneaker_id])
+                recommendations.append((sneaker_id, hybrid_score))
+            
+            recommendations.sort(key=lambda x: x[1], reverse=True)
+            recommended_sneakers = []
+
+            for sneaker_id, _ in recommendations[:num_recommendations]:
+                if str(sneaker_id) not in user_interacted_sneakers:
+                    recommended_sneakers.append(sneaker_id) 
+            
+            res = []
+            for i in recommended_sneakers:
+                currItem = []
+                for fields in sneakers[i]:
+                    currItem.append(sneakers[i][fields])
+                res.append(currItem)
+            return res
+
+        return hybrid_recommendation(currUserId)
+
+    currSession = pickle.load(open('session.pkl','rb'))
+    recommendedData = getRecommendations(currSession)
+
+    if currSession == None:
+        return render_template('recommend.html',
             shoeId = list(shoes['shoeId'].values),
             shoeBrand = list(shoes['shoeBrand'].values),
             shoeImage = list(shoes['shoeImage'].values),
@@ -103,32 +205,38 @@ def logout():
             shoeColor = list(shoes['shoeColour'].values),
             shoePrice = list(shoes['shoePrice'].values),
             user = None,
-            userCart = None,
+            userCart = list(userCart[currSession]),
+            emptyRecommendation = True,
+            personalisedRecommendation = None,
         )
 
-# @app.route('/recommend')
-# def recommend_ui():
-#     return render_template('recommend.html')
+    if len(userCart) == 0:
+        return render_template('recommend.html',
+            shoeId = list(shoes['shoeId'].values),
+            shoeBrand = list(shoes['shoeBrand'].values),
+            shoeImage = list(shoes['shoeImage'].values),
+            shoeCatagory = list(shoes['shoeCategory'].values),
+            shoeColor = list(shoes['shoeColour'].values),
+            shoePrice = list(shoes['shoePrice'].values),
+            user = currSession,
+            userCart = list(userCart[currSession]),
+            emptyRecommendation = True,
+            personalisedRecommendation = None,
+        )
+    else:
+        return render_template('recommend.html',
+            shoeId = list(shoes['shoeId'].values),
+            shoeBrand = list(shoes['shoeBrand'].values),
+            shoeImage = list(shoes['shoeImage'].values),
+            shoeCatagory = list(shoes['shoeCategory'].values),
+            shoeColor = list(shoes['shoeColour'].values),
+            shoePrice = list(shoes['shoePrice'].values),
+            user = currSession,
+            userCart = list(userCart[currSession]),
+            emptyRecommendation = None,
+            personalisedRecommendation = recommendedData,
+        )
 
-# @app.route('/recommend_books',methods=['post'])
-# def recommend():
-#     user_input = request.form.get('user_input')
-#     index = np.where(pt.index == user_input)[0][0]
-#     similar_items = sorted(list(enumerate(similarity_scores[index])), key=lambda x: x[1], reverse=True)[1:5]
-
-#     data = []
-#     for i in similar_items:
-#         item = []
-#         temp_df = books[books['Book-Title'] == pt.index[i[0]]]
-#         item.extend(list(temp_df.drop_duplicates('Book-Title')['Book-Title'].values))
-#         item.extend(list(temp_df.drop_duplicates('Book-Title')['Book-Author'].values))
-#         item.extend(list(temp_df.drop_duplicates('Book-Title')['Image-URL-M'].values))
-
-#         data.append(item)
-
-#     print(data)
-
-#     return render_template('recommend.html',data=data)
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
