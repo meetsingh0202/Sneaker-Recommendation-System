@@ -23,9 +23,6 @@ with open("ShoeDatabaseFinal.csv", "r") as db:
         id, brand, categories, colors, imageUrl, price = row
         sneakers[int(id)] = {"shoeId" : id, "brand": brand, "categories": categories, "colors": colors, "imageUrl": imageUrl, "price": price}
 
-
-print(userCart)
-
 users = { '1' : 'a', '2' : 'b'}
 
 @app.route('/bestSellers')
