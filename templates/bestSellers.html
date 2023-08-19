@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Shoe Recommendation System</title>
+    <title>Best Sellers</title>
+    <link rel = "icon" href = 
+"https://www.linkpicture.com/q/ShoeKartLogo-removebg-preview.png" 
+        type = "image/x-icon">
     
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+VlvoGtGtMS04U+25z5nRv4JGz5lX6bpeb+a5S3n6I5D" crossorigin="anonymous">
 
@@ -369,8 +372,8 @@
             <div class="overlay" id="overlay">
                 <div class="dialog-box">
                     <span class="close-icon" id="closeButton" onclick="closeDialog()">&#10006;</span>
-                    <h2>Welcome Back!</h2>
-                    <p>Login to your account to access the full features.</p> <br>
+                    <h2 style="text-align: center;">Welcome Back!</h2>
+                    <p style="text-align: center;">Login to your account to access the full features.</p> <br>
                     <form method="POST" action="{{ url_for('login') }}">
                         <label for="username" style="font-size: 15px;"><b>Username</b></label>
                         <input type="text" id="username"  name="username" placeholder="Your username" required>
@@ -386,7 +389,9 @@
             </div>
         {% endif %}
     </nav>
-
+    <div class="recommendations-header">
+        <h1 style="margin-top: 50px;">Here are our Best Sellers!<span>&#x1F525;</span>  </h1>
+    </div>
         <div class="container">
             <div class="row">
                 {% for i in range(50) %}

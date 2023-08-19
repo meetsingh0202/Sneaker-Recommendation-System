@@ -70,8 +70,8 @@
             <div class="overlay" id="overlay">
                 <div class="dialog-box">
                     <span class="close-icon" id="closeButton" onclick="closeDialog()">&#10006;</span>
-                    <h2>Welcome Back!</h2>
-                    <p>Login to your account to access the full features.</p> <br>
+                    <h2 style="text-align: center;">Welcome Back!</h2>
+                    <p style="text-align: center;">Login to your account to access the full features.</p> <br>
                     <form method="POST" action="{{ url_for('login') }}">
                         <label for="username" style="font-size: 15px;"><b>Username</b></label>
                         <input type="text" id="username"  name="username" placeholder="Your username" required>
