@@ -8,8 +8,9 @@
         type = "image/x-icon">
     <meta charset="utf-8">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+VlvoGtGtMS04U+25z5nRv4JGz5lX6bpeb+a5S3n6I5D" crossorigin="anonymous">
-    
+
     <link rel="stylesheet" href="/static/css/styles.css">
+    <link rel="stylesheet" href="/static/loginInAssests/loginCss.css">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -33,7 +34,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-default" style="background-color: brown; margin-bottom:0px">
+    <nav class="navbar navbar-default" style="background-color: brown; margin-bottom:0px; height: 56.6px;"">
         <div class = "topnav">
             <div class="navbar-header" style="margin-top: -10px;">
                 <a class="navbar-brand" href="/">
@@ -49,7 +50,7 @@
         
         
         {% if user %}
-            <div class = "cart-user-icon" onclick="openCart()">
+            <div class = "cart-user-icon" onclick="openCart()" style="padding-left: 260px; padding-top: 10px;">
                 <span class="bi bi-cart-fill" style="color: white;"> </span> 
             </div>
             
@@ -68,21 +69,30 @@
             </div>
 
             <div class="overlay" id="overlay">
-                <div class="dialog-box">
-                    <span class="close-icon" id="closeButton" onclick="closeDialog()">&#10006;</span>
-                    <h2 style="text-align: center;">Welcome Back!</h2>
-                    <p style="text-align: center;">Login to your account to access the full features.</p> <br>
-                    <form method="POST" action="{{ url_for('login') }}">
-                        <label for="username" style="font-size: 15px;"><b>Username</b></label>
-                        <input type="text" id="username"  name="username" placeholder="Your username" required>
-                        
-                        <label for="password" style="font-size: 15px;"><b>Password</b></label>
-                        <div class="password-input">
-                            <input type="password" style="width: 358px;" id="password" name="password" placeholder="Your password" required>
-                        </div>
-                        
-                        <button type="submit" class="login-button" style="font-size: 15px; align-self: center;">Login</button>
-                    </form>
+                <div class="panel-lite" style="width: 340px; height: 490px;">
+                    <div class="close-icon" id="closeButton" onclick="closeDialog()">&#10006;</div>
+
+                    <div class="icon-container">
+                        <img class="icon-lock" src="/static/images/ShoeKartLogoCircle.jpg" alt="">
+                    </div>
+                    <div class="loginContainer">
+                        <h4> <strong>Login</strong></h4>
+                        <form method="POST" action="{{ url_for('login') }}">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="username" required>
+                                <label class="form-label">Username</label>
+                              </div>
+                              
+                              <div class="form-group">
+                                <input class="form-control" type="password" name="password" required>
+                                <label class="form-label">Password</label>
+                              </div>
+                              <a href="#">Forgot Password ?</a>
+                            <button type="submit" class="floating-btn">
+                                <i onclick="" class="icon-arrow"></i>
+                            </button>
+                        </form>
+                    </div> 
                 </div>
             </div>
         {% endif %}

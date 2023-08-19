@@ -83,7 +83,8 @@ def removeFromCart(shoeId):
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
-    if users.get(username) == password:
+    print(username, password)
+    if users.get(username) == password and username != None:
         session['user'] = username
         pickle.dump(username, open('session.pkl','wb'))
         return render_template('homepage.html', 
@@ -153,7 +154,7 @@ def recommend():
             return shared_attributes / total_attributes
 
         # Hybrid recommendation algorithm
-        def hybrid_recommendation(user_id, num_recommendations=20, collaborative_weight=0.5, content_based_weight=0.5):
+        def hybrid_recommendation(user_id, num_recommendations=20, collaborative_weight=1, content_based_weight=0.5):
             user_interacted_sneakers = user_interactions.get(user_id, [])
             
             collaborative_scores = {}

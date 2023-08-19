@@ -1,0 +1,235 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:400,500,100);
+:root {
+  --primary: brown;
+}
+
+*,
+*:after,
+*:before {
+  box-sizing: border-box;
+}
+
+.close-icon {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  font-size: 20px;
+  color: brown;
+  cursor: pointer;
+}
+
+html {
+  position: relative;
+  font-family: 'Roboto', sans-serif;
+}
+
+.icon-lock {
+  position: relative;
+  width: 180px;
+  height: 180px;
+  margin: auto;
+  transform: translateY(60px);
+  border-radius: 8px;
+  margin-top: -75px;
+  box-shadow: 0 0 2px inset;
+}
+
+.icon-lock::after {
+  content: '';
+  position: absolute;
+  width: 50px;
+  height: 35px;
+  border: 9px solid #F57C00;
+  border-bottom: none;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-top-radius: 50px;
+}
+.icon-lock::before {
+  content: '';
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  background-color: #efefef;
+  left: 50%;
+  top: 20px;
+  transform: translateX(-50%);
+  border-radius: 100%;
+}
+
+.loginContainer {
+    margin-top: 180px;
+}
+
+.panel-lite {
+  margin: 20px auto;
+  max-width: 360px;
+  background: #fff;
+  padding: 45px 20px;
+  border-radius: 4px;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+  position: relative;
+}
+
+.icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  height: 10px; /* Adjust the container height as needed */
+}
+
+.panel-lite h4 {
+  font-weight: 400;
+  font-size: 24px;
+  text-align: center;
+  color: brown;
+  margin: 15px auto;
+}
+.panel-lite a {
+  display: inline-block;
+  margin-top: 25px;
+  text-decoration: none;
+  color: brown;
+  font-size: 14px;
+}
+
+.form-group {
+  position: relative;
+  font-size: 15px;
+  color: #666;
+}
+.form-group + .form-group {
+  margin-top: 20px;
+}
+.form-group .form-label {
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 17px;
+  transition: 0.3s;
+}
+.form-group .form-control {
+  width: 100%;
+  position: relative;
+  z-index: 3;
+  height: 35px;
+  background: none;
+  border: none;
+  padding: 5px 0;
+  transition: 0.3s;
+  border-bottom: 1px solid #777;
+}
+.form-group .form-control:invalid {
+  outline: none;
+}
+.form-group .form-control:focus,
+.form-group .form-control:valid {
+  outline: none;
+  color: brown;
+  box-shadow: 0 1px brown;
+  border-color: brown;
+}
+.form-group .form-control:focus + .form-label,
+.form-group .form-control:valid + .form-label {
+  font-size: 12px;
+  transform: translateY(-30px);
+}
+
+.floating-btn {
+  background: brown;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 32px;
+  border: none;
+  position: absolute;
+  margin: auto;
+  transition: 0.3s;
+  box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.3) inset;
+  right: -30px;
+  bottom: 130px;
+  cursor: pointer;
+}
+.floating-btn:hover {
+  box-shadow: 0 0 0 rgba(0, 0, 0, 0.3) inset,
+    0 3px 6px rgba(0, 0, 0, 0.16),
+    0 5px 11px rgba(0, 0, 0, 0.23);
+}
+.floating-btn:focus,
+.floating-btn:active {
+  outline: none;
+}
+
+.icon-arrow {
+  position: relative;
+  width: 13px;
+  height: 13px;
+  border-right: 3px solid #fff;
+  border-top: 3px solid #fff;
+  display: block;
+  transform: rotate(45deg);
+  margin: auto;
+  transition: 0.3s;
+}
+.icon-arrow:after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 3px;
+  background: #fff;
+  left: -5px;
+  top: 5px;
+  transform: rotate(-45deg);
+}
+.icon-arrow:hover {
+  transform: rotate(45deg) scale(1.2);
+}
+
+.form-label {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #fff;
+  padding: 0 8px;
+  font-size: 14px;
+  color: #666;
+  transition: 0.3s;
+}
+
+/* Style for the form group */
+.form-group {
+  position: relative;
+  margin: 20px 0;
+}
+
+/* Style for the form control */
+.form-control {
+  width: 100%;
+  height: 35px;
+  background: none;
+  border: none;
+  padding: 5px 0;
+  border-bottom: 1px solid #777;
+  font-size: 15px;
+  color: #333;
+  transition: 0.3s;
+}
+
+/* Highlight the label when the input is focused or valid */
+.form-control:focus,
+.form-control:valid {
+  outline: none;
+  border-color: brown;
+}
+
+.form-control:focus + .form-label,
+.form-control:valid + .form-label {
+  font-size: 12px;
+  transform: translateY(-100%) translateY(-5px);
+  color: brown;
+  background-color: #fff;
+  padding: 0 4px;
+}
