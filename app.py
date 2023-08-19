@@ -234,6 +234,10 @@ def recommend():
             personalisedRecommendation = recommendedData,
         )
 
+@app.route('/contactUs')
+def contactUs():
+    currSession = pickle.load(open('session.pkl','rb'))
+    return render_template('contact.html', user = currSession)
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
