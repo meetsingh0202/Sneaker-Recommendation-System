@@ -160,9 +160,9 @@
         
         
         <div class = "topnav">
-            <a style="color:yellow;"> <b>Shoekart</b> </a>
-            <a href="/" style="color: white;">Home</a>
-            <a href="/recommend" style="color: white;">Recommend</a>
+            <a href="homepage.html" style="color:yellow;"> <b>Shoekart</b> </a>
+            <a href="/recommend" style="color: white;">Our Bestsellers</a>
+            <a href="/recommend" style="color: white;">My Suggestions</a>
             <a style="color: white;">Contact</a>
             <a href="/" style="color: white;">About us</a>
             <input type="text" placeholder="Search for products, brand and more">
@@ -213,7 +213,7 @@
                                         <p style="color: grey;"><b>{{ shoeBrand[i] }}</b></p>
                                         <h5>{{ shoeColor[i] }}</h5>
                                         <h5>₹{{ shoePrice[i] }}</h5>
-                                        <div class = "container" style="color: red; width: 45px; height: 45px; font-size: 25px;" id="addToCartButton" onclick= "addToCart(this)" value="{{ i }}">
+                                        <div class = "container" style="color: red; width: 45px; height: 45px; font-size: px;" id="addToCartButton" onclick= "addToCart(this)" value="{{ i }}">
                                             <span class="bi bi-heart"></span> 
                                         </div>
                                         <!-- <button >Add to Cart</button> -->
