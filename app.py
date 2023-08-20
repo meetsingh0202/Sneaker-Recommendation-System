@@ -45,7 +45,6 @@ def bestSellers():
 
 @app.route("/getCartValues/<userId>")
 def getCartValues(userId):
-    print(userCart)
     return jsonify(list(userCart.get(userId, [])))
 
 @app.route('/addToCart/<shoeId>')
