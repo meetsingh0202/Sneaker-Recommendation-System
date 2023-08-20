@@ -404,16 +404,16 @@
     </div>
         <div class="container">
             <div class="row">
-                {% for i in range(50) %}
+                {% for i in bestSeller %}
                     <div class="col-md-3" style="margin-top:50px">
                         <div class="card">
                             <div class="card-body" style="width: 260px; height: 300px; background-color: white;">
-                                    <img class="card-img-top" style="text-align: center; border: 5px white; border-radius: 5px; margin-top: 30px;" width="140" height="150" src="{{ shoeImage[i] }}">
+                                    <img class="card-img-top" style="text-align: center; border: 5px white; border-radius: 5px; margin-top: 30px;" width="140" height="150" src="{{ i[4] }}">
                                     <div class = "container" style="width: 228px;">
-                                        <p class="shoeBrand" style="color: grey;"><b>{{ shoeBrand[i] }}</b></p>
-                                        <h5 class="shoeColor" style="height: 15px;">{{ shoeColor[i] }}</h5>
-                                        <h5 style="font-size: larger;">₹{{ shoePrice[i] }}</h5>
-                                        <div class = "container" id="wishlistButton" onclick="addToCart(this)" data-value="{{ i + 1 }}" clicked=false>
+                                        <p class="shoeBrand" style="color: grey;"><b>{{ i[1] }}</b></p>
+                                        <h5 class="shoeColor" style="height: 15px;">{{ i[3] }}</h5>
+                                        <h5 style="font-size: larger;">₹{{ i[5] }}</h5>
+                                        <div class = "container" id="wishlistButton" onclick="addToCart(this)" data-value="{{ i[0] }}" clicked=false>
                                             &#10084;
                                         </div>
                                     </div>

@@ -11,8 +11,10 @@
     <meta charset="utf-8">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+VlvoGtGtMS04U+25z5nRv4JGz5lX6bpeb+a5S3n6I5D" crossorigin="anonymous">
-
+    
     <link rel="stylesheet" href="/static/loginInAssests/loginCss.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+VlvoGtGtMS04U+25z5nRv4JGz5lX6bpeb+a5S3n6I5D" crossorigin="anonymous">
     <link rel="stylesheet" href="/static/loginInAssests/loginCss.css">
@@ -43,7 +45,7 @@
             cursor: pointer;
             float: right;
         }
-
+    
         .cart-user-icon {
             width: 45px;
             height: 45px;
@@ -55,11 +57,11 @@
             color: white;
             cursor: pointer;
         }
-
+    
         .user-icon:hover {
             background-color: rgb(165, 138, 42);
         }
-
+    
         .overlay {
         display: none;
         justify-content: center;
@@ -71,72 +73,72 @@
         height: 100%;
         background-color: rgba(0, 0, 0, 0.6);
         z-index: 9999;
-        }
-
-        /* Style for the dialog box */
-        .dialog-box {
+    }
+    
+    /* Style for the dialog box */
+    .dialog-box {
         background-color: #f7f7f7;
         border-radius: 10px;
         padding: 20px;
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
         width: 400px;
         position: relative;
-        }
-
-
-        /* Style for the red cross */
-        .close-icon {
+    }
+    
+    
+    /* Style for the red cross */
+    .close-icon {
         position: absolute;
         top: 15px;
         right: 15px;
         font-size: 20px;
         color: brown;
         cursor: pointer;
-        }
-
-        /* Style for the title */
-        .dialog-box h2 {
+    }
+    
+    /* Style for the title */
+    .dialog-box h2 {
         font-size: 26px;
         margin-bottom: 20px;
         color: #333;
-        }
-
-        /* Style for the form */
-        .dialog-box form {
+    }
+    
+    /* Style for the form */
+    .dialog-box form {
         display: flex;
         flex-direction: column;
-        }
-
-        /* Style for labels */
-        .dialog-box label {
+    }
+    
+    /* Style for labels */
+    .dialog-box label {
         font-size: 14px;
         margin-bottom: 10px;
         color: #555;
-        }
-
-        /* Style for input fields */
-        .dialog-box input[type="text"],
-        .dialog-box input[type="password"] {
+    }
+    
+    /* Style for input fields */
+    .dialog-box input[type="text"],
+    .dialog-box input[type="password"] {
         padding: 12px;
         margin-bottom: 20px;
         border: 1px solid #ccc;
         border-radius: 5px;
         background-color: #f9f9f9;
         color: #333;
-        }
-
-        /* Style for password toggle */
-        .toggle-password {
+    }
+    
+    /* Style for password toggle */
+    .toggle-password {
         position: absolute;
         top: 50%;
         right: 25px;
         transform: translateY(-50%);
         cursor: pointer;
         color: #aaa;
-        }
-
-        /* Style for login button */
-        .login-button {
+    }
+    
+    /* Style for login button */
+    .login-button {
         background-color: #6348d6;;
         color: #fff;
         border: none;
@@ -145,31 +147,31 @@
         cursor: pointer;
         transition: background-color 0.3s;
         font-weight: 600;
-        }
-
-        .login-button:hover {
+    }
+    
+    .login-button:hover {
         background-color: #4c32b0;
-        }
-
-        /* Style for bottom links */
-        .bottom-links {
+    }
+    
+    /* Style for bottom links */
+    .bottom-links {
         margin-top: 20px;
         font-size: 14px;
         color: #666;
-        }
-
-        .bottom-links a {
+    }
+    
+    .bottom-links a {
         color: #007bff;
         text-decoration: none;
         transition: color 0.3s;
-        }
-
-        .bottom-links a:hover {
+    }
+    
+    .bottom-links a:hover {
         color: #0056b3;
-        }
-
-        /* Style for close button */
-        .close-button {
+    }
+    
+    /* Style for close button */
+    .close-button {
         background-color: transparent;
         border: none;
         color: #777;
@@ -177,12 +179,12 @@
         cursor: pointer;
         transition: color 0.3s;
         margin-top: 25px;
-        }
-
-        .close-button:hover {
+    }
+    
+    .close-button:hover {
         color: #333;
-        }
-
+    }
+        
         .topnav a {
             float: left;
             display: block;
@@ -192,13 +194,13 @@
             text-decoration: none;
             font-size: 17px;
         }
-
+    
         /* Change the color of links on hover */
         .topnav a:hover {
             background-color: black;
             color: black;
         }
-
+    
         /* Style the search box inside the navigation bar */
         .topnav input[type=text] {
             float: left;
@@ -210,7 +212,7 @@
             font-size: 17px;
             width: 500px;
         }
-
+    
         /* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
         @media screen and (max-width: 600px) {
             .topnav a, .topnav input[type=text] {
@@ -233,17 +235,17 @@
             text-align: center;
             justify-content: center;
         }
-
+    
         /* On mouse-over, add a deeper shadow */
         .card:hover {
             box-shadow: 15px 15px 23px 15px rgba(0,0,0,0.2);
         }
-
+    
         .container {
             padding: 2px 16px;
             justify-content: center;
         }
-
+        
         #wishlistButton {
             cursor: pointer;
             width: 100px;
@@ -253,17 +255,95 @@
             top: 15px;
             right: 0;
         }
-
+    
         .shoeBrand {
             overflow: hidden;
             text-overflow: ellipsis;
         }
-
+    
         .shoeBrand:hover{
             overflow: visible; 
             white-space: normal;
             height:auto;  /* just added this line */
         }
+    
+        .shoeColor {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+        .logo-image{
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-top: -6px;
+        }
+    
+        .shoeColor:hover{
+            overflow: visible; 
+            white-space: normal;
+            height:auto;  /* just added this line */
+        }
+    
+        .active {
+            background-color: black; /* Change this to the desired background color */
+            padding: 10px;
+            border-radius: 5px;
+        }
+    
+        .recommendations-header {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    
+        .recommendations-header h1 {
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: brown;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
+        .heart-symbol {
+            color: red;
+        }
+    
+        #logOutButton {
+            float: right;
+            display: flex;
+            align-items: center;
+            font-size: 18px;
+            margin-top: -40px;
+            margin-right: 20px;
+        }
+    
+        #logOutButton span {
+            font-weight: bold;
+            font-size: 20px; /* Increase the font size */
+            margin-right: 10px;
+            color: white;
+        }
+    
+        #logOutButton a {
+            text-decoration: none;
+            color: black;
+            font-weight: bold;
+            border: 2px solid brown;
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+    
+        #logOutButton a:hover {
+            background-color: black;
+            color: white;
+        }
+    
         .dropdown {
             position: relative;
             margin: 10px;
@@ -274,7 +354,7 @@
             border: 1px solid #ced4da;
 
             color: brown;
-                        font-size: 16px;
+            font-size: 16px;
             font-weight: bold;
             padding: 8px 16px;
             cursor: pointer;
@@ -350,8 +430,6 @@
         .dropdown-content a:hover {
             background-color: #f1f1f1;
         }
-
-        
 .card{
     height: 298px;
     width: 180px;
@@ -381,13 +459,7 @@
        display: flex;
        flex-flow: row wrap;
       }
-   .carousel-inner {
-       height: 340px;
-   }
    
-   .carousel-item img {
-       height: 290px;
-   }
    .posterDiv{
    width: 15%;
    }
@@ -418,11 +490,92 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-
+        .card {
+            /* Add shadows to create the "card" effect */
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            transition: 0.3s;
+            display: flex;
+            text-align: center;
+            justify-content: center;
+        }
+    
+        /* On mouse-over, add a deeper shadow */
+        .card:hover {
+            box-shadow: 15px 15px 23px 15px rgba(0,0,0,0.2);
+        }
+    
+        .container {
+            padding: 2px 16px;
+            justify-content: center;
+        }
+        
+        #wishlistButton {
+            cursor: pointer;
+            width: 100px;
+            height: 45px; 
+            font-size: 35px;
+            position: absolute;
+            top: 15px;
+            right: 0;
+        }
+    
+        .shoeBrand {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+        .shoeBrand:hover{
+            overflow: visible; 
+            white-space: normal;
+            height:auto;  /* just added this line */
+        }
+    
+        .shoeColor {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    
+        .logo-image{
+            width: 46px;
+            height: 46px;
+            border-radius: 50%;
+            overflow: hidden;
+            margin-top: -6px;
+        }
+    
+        .shoeColor:hover{
+            overflow: visible; 
+            white-space: normal;
+            height:auto;  /* just added this line */
+        }
+    
+        .active {
+            background-color: black; /* Change this to the desired background color */
+            padding: 10px;
+            border-radius: 5px;
+        }
+    
+        .recommendations-header {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    
+        .recommendations-header h1 {
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: brown;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    
         .heart-symbol {
             color: red;
         }
-
+    
         #logOutButton {
             float: right;
             display: flex;
@@ -431,14 +584,14 @@
             margin-top: -40px;
             margin-right: 20px;
         }
-
+    
         #logOutButton span {
             font-weight: bold;
             font-size: 20px; /* Increase the font size */
             margin-right: 10px;
             color: white;
         }
-
+    
         #logOutButton a {
             text-decoration: none;
             color: black;
@@ -448,11 +601,13 @@
             border-radius: 5px;
             transition: background-color 0.3s, color 0.3s;
         }
-
+    
         #logOutButton a:hover {
             background-color: black;
             color: white;
         }
+
+        
     </style>
 </head>
 
@@ -526,15 +681,15 @@
                 <div class="dropdown"><button id="Electronic" class="btn  dropbtn dropdown-toggle font-weight-bold m-1"
                         type="button" data-toggle="dropdown" style="font-size : 20px;">MEN <span class="arrow-down">&#9660;</span> </button>
                         <div class="dropdown-content">
-                            <a href="#">LOAFERS</a>
-                            <a href="#">DERBY SHOES</a>
-                            <a href="#">CHELSEA-STYLE BOOTS</a>
-                            <a href="#">CASUAL SLIP-ON SHOES</a>
-                            <a href="#">ACTIVE SNEAKERS</a>
-                            <a href="#">WALKING SHOES</a>
-                            <a href="#">AT-HOME SHOES</a>
-                            <a href="#">SLIDES</a>
-                            <a href="#">ACTIVE SANDALS</a>
+                            <a href="#">Loafers</a>
+                            <a href="#">Derby Shoes</a>
+                            <a href="#">Chelsea-Style Boots</a>
+                            <a href="#">Casual Slip-On Shoes</a>
+                            <a href="#">Active Sneakers</a>
+                            <a href="#">Walking Shoes</a>
+                            <a href="#">At-Home Shoes</a>
+                            <a href="#">Slides</a>
+                            <a href="#">Active Sandals</a>
                         </div>
                 </div>
                 <div class="dropdown"><button id="Tv" class="btn dropbtn dropdown-toggle font-weight-bold m-1" type="button"
@@ -584,227 +739,308 @@
     </div>
 
     
-    <div class="container-fluid m-0">
-        <div id="carouselExampleIndicators" class="carousel mb-0 mx-4 slide data-ride=" carousel">
+    <style>
+        .carousel-inner img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover; /* Maintain aspect ratio while covering the container */
+        }
+    </style>
+    
+    <div class="container-fluid">
+        <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
             <ol class="carousel-indicators">
-                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active" style="padding: 0;"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="1" style="padding: 0;"></li>
-                <li data-target="#carouselExampleIndicators" data-slide-to="2" style="padding: 0;"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+                <li data-target="#carouselExampleIndicators" data-slide-to="3"></li>
             </ol>
             <div class="carousel-inner">
-
-                <div class="carousel-item active">
-                    <img class="d-block w-100"
-                        src="/static/images/carousel1.jpg"
-                        height="600px"
-                        width="600px"
-                        alt="First slide">
+                <div class="item active">
+                    <img src="/static/images/Carasoul1.jpg" alt="First slide">
                 </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100"
-                        src="/static/images/carousel2.jpg"
-                        height="600px"
-                        width="400px"
-                        alt="Second slide">
+                <div class="item">
+                    <img src="/static/images/Carasoul2.jpg" alt="Second slide">
                 </div>
-                <div class="carousel-item">
-                    <img class="d-block w-100"
-                        src="/static/images/carousel3.jpg"
-                        height="600px"
-                        width="600px"
-                        alt="Third slide">
+                <div class="item">
+                    <img src="/static/images/Carasoul3.jpg" alt="Third slide">
+                </div>
+                <div class="item">
+                    <img src="/static/images/Carasoul4.jpg" alt="Fourth slide">
                 </div>
             </div>
-            <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <a class="left carousel-control" href="#carouselExampleIndicators" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
                 <span class="sr-only">Previous</span>
             </a>
-            <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <a class="right carousel-control" href="#carouselExampleIndicators" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
                 <span class="sr-only">Next</span>
             </a>
         </div>
     </div>
-    <p style="display: flex; justify-content: center; text-align: center; font-size: 20px;"><b>CATEGORIES</b></p>
-    <div id="showDiv" class="container-fluid m-0 mt-1 p-0">
-        <div id="cardsDiv" class="container-fluid row  mt-1 p-0"></div>
+
+    <div class="recommendations-header">
+        <h1 style="margin-top: 50px; margin-bottom: 0px;">Here are some of our Best Sellers!<span>&#x1F525;</span>  </h1>
     </div>
-    <div class="container-fluid">
-        <div class="mainflex mx-4">
-            <div class="flexbox border">
-                <div class="card text-center">
-                    <img src="/static/images/category1_loafers.jpg"
-                        height="150px" class="card-img-top">
-                    <div class="card-body text-dark text-center">
-                        <h6 class="card-title font-weight-bold" style="font-size: 15px;">Loafers</h6>
-                        <p class="card-subtitle mb-2 text-success" style="font-size: 16px;">From ₹599 + Extra 10% Off</p>
-                        <p class="card-text text-muted ">Top Selling</p>
+        <div class="container">
+            <div class="row">
+                {% for i in range(8) %}
+                    <div class="col-md-3" style="margin-top:50px">
+                        <div class="card">
+                            <div class="card-body" style="width: 260px; height: 300px; background-color: white;">
+                                    <img class="card-img-top" style="text-align: center; border: 5px white; border-radius: 5px; margin-top: 30px;" width="140" height="150" src="{{ shoeImage[i] }}">
+                                    <div class = "container" style="width: 228px;">
+                                        <p class="shoeBrand" style="color: grey;"><b>{{ shoeBrand[i] }}</b></p>
+                                        <h5 class="shoeColor" style="height: 15px;">{{ shoeColor[i] }}</h5>
+                                        <h5 style="font-size: larger;">₹{{ shoePrice[i] }}</h5>
+                                        <div class = "container" id="wishlistButton" onclick="addToCart(this)" data-value="{{ i + 1 }}" clicked=false style="left: 130px;">
+                                            &#10084;
+                                        </div>
+                                    </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card text-center">
-                    <img src="/static/images/category2_stilettos.jpg"
-                        height="150px" class="card-img-top">
-                    <div class="card-body text-dark text-center">
-                        <h6 class="card-title font-weight-bold" style="font-size: 15px;">Stilettos</h6>
-                        <p class="card-subtitle mb-2 text-success" style="font-size: 16px;">Min 65% Off + Extra 5%</p>
-                        <p class="card-text text-muted ">BestSelling Collection</p>
-                    </div>
-                </div>
-                <div class="card text-center">
-                    <img src="/static/images/category3_kids_shoes.jpg"
-                        height="150px" class="card-img-top">
-                    <div class="card-body text-dark text-center">
-                        <h6 class="card-title font-weight-bold" style="font-size: 15px;">Kids Shoes</h6>
-                        <p class="card-subtitle mb-2 text-success" style="font-size: 16px;">Upto 60% Off + Extra 10% Off</p>
-                        <p class="card-text text-muted ">Nike, Adidas, more</p>
-                    </div>
-                </div>
-                <div class="card text-center">
-                    <img src="/static/images/category4_juttis.jpg"
-                        height="150px" class="card-img-top">
-                    <div class="card-body text-dark text-center">
-                        <h6 class="card-title font-weight-bold" style="font-size: 15px;">Juttis</h6>
-                        <p class="card-subtitle mb-2 text-success" style="font-size: 16px;">From ₹1079 + Extra 5% Off</p>
-                        <p class="card-text text-muted ">Exclusive Anita Dongre Collection</p>
-                    </div>
-                </div>
-                <div class="card text-center">
-                    <img src="/static/images/category5_boots.jpg"
-                        height="150px" class="card-img-top">
-                    <div class="card-body text-dark text-center">
-                        <h6 class="card-title font-weight-bold" style="font-size: 15px;">Boots</h6>
-                        <p class="card-subtitle mb-2 text-success" style="font-size: 16px;">From ₹2000 + Extra 2% Off</p>
-                        <p class="card-text text-muted ">Exclusive Collection</p>
-                    </div>
-                </div>
-                <div class="card text-center">
-                    <img src="/static/images/category6_sneakers.jpg"
-                        height="150px" class="card-img-top">
-                    <div class="card-body text-dark text-center">
-                        <h6 class="card-title font-weight-bold" style="font-size: 15px;">Sneakers</h6>
-                        <p class="card-subtitle mb-2 text-success" style="font-size: 16px;">Starting From ₹10000</p>
-                        <p class="card-text text-muted ">Best of G by Guess</p>
-                    </div>
-                </div>
-                <div class="card text-center">
-                    <img src="/static/images/category7_sliders.jpg"
-                        height="150px" class="card-img-top">
-                    <div class="card-body text-dark text-center">
-                        <h6 class="card-title font-weight-bold" style="font-size: 15px;">Sliders</h6>
-                        <p class="card-subtitle mb-2 text-success" style="font-size: 16px;">From ₹5079 + Extra 5% Off</p>
-                        <p class="card-text text-muted ">Available in Reebok and Adidas</p>
-                    </div>
-                </div>
-                <div class="card text-center">
-                    <img src="/static/images/category8_flip-flops.jpg"
-                        height="150px" class="card-img-top">
-                    <div class="card-body text-dark text-center">
-                        <h6 class="card-title font-weight-bold" style="font-size: 15px;">Flip-flops</h6>
-                        <p class="card-subtitle mb-2 text-success" style="font-size: 16px;">From ₹379</p>
-                        <p class="card-text text-muted ">Comfortable flip flops of Nike</p>
-                    </div>
-                </div>
-                <div class="card text-center">
-                    <img src="/static/images/category9_sandals.jpg"
-                        height="150px" class="card-img-top">
-                    <div class="card-body text-dark text-center">
-                        <h6 class="card-title font-weight-bold" style="font-size: 15px;">Sandals</h6>
-                        <p class="card-subtitle mb-2 text-success" style="font-size: 16px;">From ₹9999 + Extra 5% Off</p>
-                        <p class="card-text text-muted ">Best of Vince Camuto</p>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
         </div>
-    </div> 
 
-    <div class="container-flui  d">
-        <div class="cardDiv row mx-4 border">
-            <img class="col-sm-12 col-lg-4 mt-1"
-                src="/static/images/advertisement1.jpg">
-            <img class="col-sm-12 col-lg-4 mt-1"
-                src="/static/images/advertisement2.jpg">
-            <img class="col-sm-12 col-lg-4 mt-1 "
-                src="/static/images/advertisement3.jpg">
-        </div>
-    </div> <br>
-    
+    <style>
+        /* Add your custom styles here */
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .advertisement-container {
+            padding: 30px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            margin: 20px auto;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .advertisement-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .advertisement-col {
+            flex: 1;
+            padding: 10px;
+            text-align: center;
+        }
+        .advertisement-col img {
+            width: 500px;
+            height: 200px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #fff;
+            margin: auto; /* Center smaller images */
+        }
+
+        .advertisement-col img {
+            max-width: 100%;
+            height: auto;
+            border: 1px solid #ddd;
+            padding: 5px;
+            background-color: #fff;
+        }
+    </style>
     <div class="container-fluid">
         <div class="mx-4 border">
-            <p style="display: flex; justify-content: center; text-align: center; font-size: 20px;"><b>TOP BRANDS</b></p>
-            <div class="flexbox2">
-                <div class="cardbrands text-center">
-                    <img src="/static/images/style&co_logo.jpg"
-                        height="150px" class="card-img-top">
+            <div style="margin-top: 50px;" class="row advertisement-row">
+                <div style="width: 520px;height: 320px;" class="col-sm-12 col-lg-4 advertisement-col">
+                    <img style="width: 520px;height: 320px;" src="/static/images/advertisement1.jpg" alt="Advertisement 1">
                 </div>
-                <div class="cardbrands text-center">
-                    <img src="/static/images/caparros_logo.jpg"
-                        height="150px" class="card-img-top">
+                <div style="width: 520px;height: 320px;" class="col-sm-12 col-lg-4 advertisement-col">
+                    <img style="width: 520px;height: 320px;" src="/static/images/advertisement2.jpg" alt="Advertisement 2">
                 </div>
-                <div class="cardbrands text-center">
-                    <img src="/static/images/vince_camuto_logo.jpg"
-                        height="150px" class="card-img-top">
-                </div>
-                <div class="cardbrands text-center">
-                    <img src="/static/images/ellen_tracy_logo.jpg"
-                        height="150px" class="card-img-top">
-                </div>
-                <div class="cardbrands text-center">
-                    <img src="/static/images/born_logo.jpg"
-                        height="150px" class="card-img-top">
-                </div>
-                <div class="cardbrands text-center">
-                    <img src="/static/images/alfani_logo.jpg"
-                        height="150px" class="card-img-top">
-                </div>
-                <div class="cardbrands text-center">
-                    <img src="/static/images/Kate_Spade_logo.jpg"
-                        height="150px" class="card-img-top">
-                </div>
-                <div class="cardbrands text-center">
-                    <img src="/static/images/guess_logo.jpg"
-                        height="150px" class="card-img-top">
-                </div>
-                <div class="cardbrands text-center">
-                    <img src="/static/images/karen_scott_logo.jpg"
-                        height="150px" class="card-img-top">
+                <div style="width: 520px;height: 320px;" class="col-sm-12 col-lg-4 advertisement-col">
+                    <img style="width: 520px;height: 320px;" src="/static/images/advertisement3.jpg" alt="Advertisement 3">
                 </div>
             </div>
         </div>
     </div>
 
-
-    <script>
-    function sessionCheck() {
-        const userIcon = document.getElementById("userIcon");
-        const overlay = document.getElementById("overlay");
-        const closeButton = document.getElementById("closeButton");
-
-        userIcon.addEventListener("click", function() {
-            overlay.style.display = "flex";
-        });
-
-        closeButton.addEventListener("click", function() {
-            overlay.style.display = "none";
-        });
-    }
-
-    function addToCart(button) {
-        if (button.textContent == "Add to Cart"){
-            fetch(`/addToCart/${button.value}`) 
-            alert("Added To Cart!");
-            button.textContent = "Remove From Cart";
-        }
-        else{
-            fetch(`/removeFromCart/${button.value}`)
-            alert("Removed From Cart!");
-            button.textContent = "Add To Cart";
-        }
-    };
     
-    function openCart(){
-        window.location.href = "/openCart";
-    }
     
-    </script>
+    
+    <style>
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .recommendations-header {
+            text-align: center;
+            margin-top: 50px;
+        }
+        body {
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+        .recommendations-header {
+            text-align: center;
+            margin-top: 50px;
+        }
+        .flexbox2 {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .cardbrands {
+            flex: 0 0 calc(20% - 20px);
+            margin: 10px;
+            background-color: #fff;
+            border: 1px solid #ddd;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            width: 150px; /* Fixed width */
+            height: 150px; /* Fixed height */
+            overflow: hidden; /* Hide overflow to prevent distortion */
+        }
+        .cardbrands img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain; /* Maintain aspect ratio and cover the container */
+        }
+
+        .recommendations-header {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+    
+        .recommendations-header h1 {
+            display: inline-block;
+            font-size: 24px;
+            font-weight: bold;
+            color: brown;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+
+    
+
+        <div class="container-fluid">
+            <div class="mx-4 border">
+                <div class="recommendations-header">
+                    <h1>Our Top Brands<span>&#x1F525;</span></h1>
+                </div>
+                <div class="flexbox2">
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/style&co_logo.jpg" class="card-img-top" alt="Style &amp; Co.">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/caparros_logo.jpg" class="card-img-top" alt="Caparros">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/vince_camuto_logo.jpg" class="card-img-top" alt="Vince Camuto">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/ellen_tracy_logo.jpg" class="card-img-top" alt="Ellen Tracy">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/born_logo.jpg" class="card-img-top" alt="Born">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/alfani_logo.jpg" class="card-img-top" alt="Alfani">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/Kate_Spade_logo.jpg" class="card-img-top" alt="Kate Spade">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/guess_logo.jpg" class="card-img-top" alt="Guess">
+                    </div>
+                    <div class="cardbrands text-center">
+                        <img src="/static/images/karen_scott_logo.jpg" class="card-img-top" alt="Karen Scott">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            function sessionCheck() {
+                const userIcon = document.getElementById("userIcon");
+                const overlay = document.getElementById("overlay");
+                const closeButton = document.getElementById("closeButton");
+        
+                userIcon.addEventListener("click", function() {
+                    overlay.style.display = "flex";
+                });
+        
+                closeButton.addEventListener("click", function() {
+                    overlay.style.display = "none";
+                });
+            }
+        
+            function addToCart(button) {
+                if (user == 'None'){
+                    alert("Please Log-In First");
+                    return;
+                }
+                var shoeId = button.getAttribute("data-value");
+                if (!button.clicked){
+                    fetch(`/addToCart/${shoeId}`) 
+                    alert("Added To Cart!");
+                    button.style.color = "red";
+                    button.clicked = true;
+                }
+                else{
+                    fetch(`/removeFromCart/${shoeId}`)
+                    alert("Removed From Cart!");
+                    button.style.color = "black";
+                    button.clicked = false;
+                }
+            };
+        
+            var user = "{{ user }}";
+            var a = "{{ userCart }}";
+            currCart = new Set();
+        
+            async function fetchData(user) {
+                try {
+                    const response = await fetch(`/getCartValues/${user}`);
+                    const data = await response.json();
+                    data.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        currCart.add(li.textContent);
+                    });
+                } catch (error) {
+                    console.error('Error fetching data:', error);
+                }
+            }
+        
+            function openCart(){
+                window.location.href = "/openCart";
+            }
+        
+            async function makeChangesAccordingToCart() {
+                await fetchData(user); // Fetch cart values and populate currCart
+                // console.log(currCart, user);
+                document.querySelectorAll('[id=wishlistButton]').forEach(element => {
+                    var shoeId = element.getAttribute("data-value");
+                    if (currCart.has(shoeId)) {
+                        element.style.color = "red";
+                        element.clicked = true;
+                    } else {
+                        element.style.color = "black";
+                        element.clicked = false;
+                    }
+                });
+            }
+            makeChangesAccordingToCart();
+        
+        </script>
 </body>
 </html>

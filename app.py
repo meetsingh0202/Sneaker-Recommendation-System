@@ -4,7 +4,6 @@ import numpy as np
 from collections import *
 import csv
 
-
 app = Flask(__name__, static_url_path='/static')
 
 shoes = pickle.load(open('shoes.pkl','rb'))
@@ -20,21 +19,26 @@ with open("ShoeDatabaseFinal.csv", "r") as db:
         if count == 0:
             count += 1
             continue
-        id, brand, categories, colors, imageUrl, price = row
-        sneakers[int(id)] = {"shoeId" : id, "brand": brand, "categories": categories, "colors": colors, "imageUrl": imageUrl, "price": price}
+        id, brand, categories, colors, imageUrl, price, rating = row
+        sneakers[int(id)] = {"shoeId" : id, "brand": brand, "categories": categories, "colors": colors, "imageUrl": imageUrl, "price": price, 'rating': rating}
 
 users = { '1' : 'a', '2' : 'b'}
+
+bestSellerShoes = []
+for i in sneakers:
+    currItem = []
+    for fields in sneakers[int(i)]:
+        currItem.append(sneakers[int(i)][fields])
+    bestSellerShoes.append(currItem)
+
+bestSellerShoes.sort(key=lambda x : x[-1], reverse=True)
+bestSellerShoes = bestSellerShoes[:52]
 
 @app.route('/bestSellers')
 def bestSellers():
     currSession = pickle.load(open('session.pkl','rb'))
     return render_template('bestSellers.html', 
-        shoeId = list(shoes['shoeId'].values),
-        shoeBrand = list(shoes['shoeBrand'].values),
-        shoeImage = list(shoes['shoeImage'].values),
-        shoeCatagory = list(shoes['shoeCategory'].values),
-        shoeColor = list(shoes['shoeColour'].values),
-        shoePrice = list(shoes['shoePrice'].values),
+        bestSeller = bestSellerShoes, 
         user = currSession,
         userCart = list(userCart[currSession]),
     )
@@ -77,7 +81,6 @@ def removeFromCart(shoeId):
             user = currSession,
             userCart = list(tempCart[currSession]),
         )
-
 
 @app.route('/login', methods=['POST'])
 def login():
@@ -129,7 +132,12 @@ def openCart():
 @app.route('/')
 def home():
     currSession = pickle.load(open('session.pkl','rb'))
-    return render_template('homepage.html', user = currSession)
+    return render_template('homepage.html', user = currSession,shoeId = list(shoes['shoeId'].values),
+        shoeBrand = list(shoes['shoeBrand'].values),
+        shoeImage = list(shoes['shoeImage'].values),
+        shoeCatagory = list(shoes['shoeCategory'].values),
+        shoeColor = list(shoes['shoeColour'].values),
+        shoePrice = list(shoes['shoePrice'].values),)
 
 @app.route('/recommend')
 def recommend():
@@ -153,8 +161,8 @@ def recommend():
 
         # Calculate content-based similarity (mock values)
         def content_based_similarity(sneaker1, sneaker2):
-            shared_attributes = sum(sneaker1[attr] == sneaker2[attr] for attr in ['brand', 'categories', 'colors', 'price'])
-            total_attributes = len(['brand', 'categories', 'colors', 'price'])
+            shared_attributes = sum(sneaker1[attr] == sneaker2[attr] for attr in ['brand', 'categories', 'colors', 'price', 'rating'])
+            total_attributes = len(['brand', 'categories', 'colors', 'price', 'rating'])
             return shared_attributes / total_attributes
 
         # Hybrid recommendation algorithm
@@ -200,19 +208,13 @@ def recommend():
 
     if currSession == None:
         return render_template('recommend.html',
-            shoeId = list(shoes['shoeId'].values),
-            shoeBrand = list(shoes['shoeBrand'].values),
-            shoeImage = list(shoes['shoeImage'].values),
-            shoeCatagory = list(shoes['shoeCategory'].values),
-            shoeColor = list(shoes['shoeColour'].values),
-            shoePrice = list(shoes['shoePrice'].values),
             user = None,
             userCart = list(userCart[currSession]),
             emptyRecommendation = True,
             personalisedRecommendation = None,
         )
 
-    if len(userCart) == 0:
+    if len(userCart[currSession]) == 0:
         return render_template('recommend.html',
             shoeId = list(shoes['shoeId'].values),
             shoeBrand = list(shoes['shoeBrand'].values),
