@@ -1,6 +1,3 @@
 flask
 numpy
-pandas
-gunicorn
-surprise
-scikit-surprise
+pandas==1.4.1
