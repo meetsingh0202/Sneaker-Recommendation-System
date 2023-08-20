@@ -5,6 +5,7 @@ from collections import *
 import csv
 
 app = Flask(__name__, static_url_path='/static')
+app.secret_key = 'super secret key'
 
 shoes = pickle.load(open('shoes.pkl','rb'))
 userCart = pickle.load(open('userCart.pkl','rb'))
@@ -265,5 +266,4 @@ def allProducts():
     )
 
 if __name__ == '__main__':
-    app.secret_key = 'super secret key'
     app.run(debug = True)
