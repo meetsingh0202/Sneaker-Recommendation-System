@@ -86,7 +86,6 @@ def removeFromCart(shoeId):
 def login():
     username = request.form.get('username')
     password = request.form.get('password')
-    print(username, password)
     if users.get(username) == password and username != None:
         session['user'] = username
         pickle.dump(username, open('session.pkl','wb'))
@@ -116,7 +115,13 @@ def login():
 def logout():
     session.pop('user', None)
     pickle.dump(None, open('session.pkl','wb'))
-    return render_template('homepage.html', user = None)
+    return render_template('homepage.html', user = None,
+            shoeId = list(shoes['shoeId'].values),
+            shoeBrand = list(shoes['shoeBrand'].values),
+            shoeImage = list(shoes['shoeImage'].values),
+            shoeCatagory = list(shoes['shoeCategory'].values),
+            shoeColor = list(shoes['shoeColour'].values),
+            shoePrice = list(shoes['shoePrice']),)
 
 @app.route('/openCart')
 def openCart():
