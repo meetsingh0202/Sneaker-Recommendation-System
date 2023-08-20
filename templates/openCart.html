@@ -107,6 +107,28 @@
             border: 1px solid #ccc;
         }
     }
+    .caution-sign {
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-bottom: 30px solid #ffc107; /* Caution color */
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin-right: 8px;
+  }
+
+  .exclamation {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    font-family: Arial, sans-serif;
+  }
     .card {
         /* Add shadows to create the "card" effect */
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -238,12 +260,13 @@
 
             <a href="/bestSellers" style="color: white;">Best Sellers</a>
             <a href="/recommend" style="color: white;">Recommend</a>
+            <a href="/allProducts" style="color: white;">Our Products</a>
             <a href="/contactUs" style="color: white;">About us</a>
             <input type="text" placeholder="Search for products, brand and more">
         </div>  
         
         {% if user %}
-            <div class = "cart-user-icon" onclick="openCart()" style="padding-left: 260px; padding-top: 10px;">
+            <div class = "cart-user-icon" onclick="openCart()" style="padding-left: 80px; padding-top: 10px;">
                 <span class="bi bi-cart-fill" style="color: white;"> </span> 
             </div>
 
@@ -297,6 +320,8 @@
                 window.location.href = "/";
         </script>
     {% else %}
+
+        {% if currCart %}
         <div class="recommendations-header">
             <h1 style="margin-top: 50px;">Here are the Items Wishlisted By You! <span class="heart-symbol">&#10084;</span>  </h1>
         </div>
@@ -321,6 +346,15 @@
                 {% endfor %}
             </div>
         </div>
+        {% else %}
+        <div class="recommendations-header">
+            <h1 style="margin-top: 50px;">Sorry! You Don't Have Any Wishlisted Items!
+                <div class="caution-sign">
+                    <div class="exclamation">!</div>
+                </div>
+            </h1>
+        </div>
+        {% endif %}
     {% endif %}
 
 </body>

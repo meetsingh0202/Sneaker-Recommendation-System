@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Best Sellers</title>
+    <title>Our Products</title>
     <link rel = "icon" href = 
 "https://www.linkpicture.com/q/ShoeKartLogo-removebg-preview.png" 
         type = "image/x-icon">
@@ -13,7 +13,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
 
-    
     <style>
         .text-white{
             color:black
@@ -344,9 +343,9 @@
                 </a>
             </div>
 
-            <a class="active" href="/bestSellers" style="color: white;">Best Sellers</a>
+            <a href="/" style="color: white;">Best Sellers</a>
             <a href="/recommend" style="color: white;">Recommend</a>
-            <a href="/allProducts" style="color: white;">Our Products</a>
+            <a class="active" href="/allProducts" style="color: white;">Our Products</a>
             <a href="/contactUs" style="color: white;">About us</a>
             <input type="text" placeholder="Search for products, brand and more">
         </div>  
@@ -400,11 +399,11 @@
         {% endif %}
     </nav>
     <div class="recommendations-header">
-        <h1 style="margin-top: 50px;">Here are our Best Sellers!<span>&#x1F525;</span>  </h1>
+        <h1 style="margin-top: 50px;">Presenting our complete range of meticulously curated products! <span class="heart-symbol">&#10084;</span> </h1>
     </div>
         <div class="container">
             <div class="row">
-                {% for i in range(50) %}
+                {% for i in range(shoeBrand|length) %}
                     <div class="col-md-3" style="margin-top:50px">
                         <div class="card">
                             <div class="card-body" style="width: 260px; height: 300px; background-color: white;">

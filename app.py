@@ -143,6 +143,10 @@ def recommend():
             if user1 in user_interactions and user2 in user_interactions:
                 intersection = len(set(user_interactions[user1]) & set(user_interactions[user2]))
                 union = len(set(user_interactions[user1]) | set(user_interactions[user2]))
+
+                if intersection == 0 or union == 0:
+                    return 0
+                    
                 return intersection / union
             else:
                 return 0.0
@@ -239,6 +243,20 @@ def recommend():
 def contactUs():
     currSession = pickle.load(open('session.pkl','rb'))
     return render_template('contact.html', user = currSession)
+
+@app.route('/allProducts')
+def allProducts():
+    currSession = pickle.load(open('session.pkl','rb'))
+    return render_template('allProducts.html', 
+        shoeId = list(shoes['shoeId'].values),
+        shoeBrand = list(shoes['shoeBrand'].values),
+        shoeImage = list(shoes['shoeImage'].values),
+        shoeCatagory = list(shoes['shoeCategory'].values),
+        shoeColor = list(shoes['shoeColour'].values),
+        shoePrice = list(shoes['shoePrice'].values),
+        user = currSession,
+        userCart = list(userCart[currSession]),
+    )
 
 if __name__ == '__main__':
     app.secret_key = 'super secret key'
