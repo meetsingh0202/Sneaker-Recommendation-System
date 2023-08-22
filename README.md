@@ -15,7 +15,8 @@ Steps to start the application:
 
 ------------------------------------------------------------------------------------------------------------
 
-For Login Credentials : We currently have configured two users!
+For Login Credentials : We currently have configured two users, but you can add more 
+                        by going to app.py and adding [key : username, value : password] in line 26 
 
 ->  User Name : 1 
     Password : 'a'
