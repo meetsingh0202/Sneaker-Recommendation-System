@@ -389,6 +389,36 @@
                                 <label class="form-label">Password</label>
                               </div>
                               <a href="#">Forgot Password ?</a>
+                              <a onclick="signUp()" > Sign Up </a>
+                            <button type="submit" class="floating-btn">
+                                <i onclick="" class="icon-arrow"></i>
+                            </button>
+                        </form>
+                    </div> 
+                </div>
+            </div>
+
+            <div class="overlay" id="overlay">
+                <div class="panel-lite" style="width: 340px; height: 490px;">
+                <div class="close-icon" id="closeButton" onclick="closeDialog()">&#10006;</div>
+
+                    <div class="icon-container">
+                        <img class="icon-lock" src="/static/images/ShoeKartLogoCircle.jpg" alt="">
+                    </div>
+                    <div class="loginContainer">
+                        <h4> <strong>Login</strong></h4>
+                        <form method="POST" action="{{ url_for('login') }}">
+                            <div class="form-group">
+                                <input class="form-control" type="text" name="username" required>
+                                <label class="form-label">Username</label>
+                              </div>
+                              
+                              <div class="form-group">
+                                <input class="form-control" type="password" name="password" required>
+                                <label class="form-label">Password</label>
+                              </div>
+                              <a href="#">Forgot Password ?</a>
+                              <a onclick="sessionCheck()" > Sign In </a>
                             <button type="submit" class="floating-btn">
                                 <i onclick="" class="icon-arrow"></i>
                             </button>
@@ -427,6 +457,20 @@
 
 <script>
     function sessionCheck() {
+        const userIcon = document.getElementById("userIcon");
+        const overlay = document.getElementById("overlay");
+        const closeButton = document.getElementById("closeButton");
+
+        userIcon.addEventListener("click", function() {
+            overlay.style.display = "flex";
+        });
+
+        closeButton.addEventListener("click", function() {
+            overlay.style.display = "none";
+        });
+    }
+
+    function signUp() {
         const userIcon = document.getElementById("userIcon");
         const overlay = document.getElementById("overlay");
         const closeButton = document.getElementById("closeButton");
